@@ -599,6 +599,8 @@
         <p class="dica" style="margin-top:0">Um item por linha. Estas listas aparecem para escolher no cadastro das rubricas (aba Orçamento).
           Remover um item da lista não muda as rubricas que já usam esse valor.</p>
         <div class="form-grade">
+          <div class="largo"><label for="lsRubricas">Rubricas (aparecem para escolher em "Descrição rubrica")</label>
+            <textarea id="lsRubricas" rows="8" style="width:100%" placeholder="ex.: Coordenador(a) pedagógico(a)"></textarea></div>
           <div class="largo"><label for="lsTipos">Tipos de despesa</label><textarea id="lsTipos" rows="6" style="width:100%"></textarea></div>
           <div class="largo"><label for="lsClassif">Classificações contábeis (SIT)</label>
             <textarea id="lsClassif" rows="10" style="width:100%" placeholder="ex.: 3.3.90.36 – Outros serviços de terceiros – pessoa física"></textarea></div>
@@ -714,7 +716,8 @@
     <div class="modal-corpo">
       <div class="form-grade">
         <div><label for="r_codigo">Item</label><input id="r_codigo"></div>
-        <div class="largo"><label for="r_descricao">Descrição rubrica *</label><input id="r_descricao" required></div>
+        <div class="largo"><label for="r_descricao">Descrição rubrica *</label><span id="r_descricao_caixa"><input id="r_descricao" required></span>
+          <div class="dica oculto" id="r_desc_dica" style="margin:4px 0 0">Para escolher de uma lista, cadastre as rubricas em Configurações → Listas.</div></div>
         <div><label for="r_carga_horaria">Carga horária (horas/mês)</label><input id="r_carga_horaria" inputmode="decimal" placeholder="ex.: 40"></div>
         <div><label for="r_tipo_despesa">Tipo de despesa</label>
           <select id="r_tipo_despesa"><option value="">—</option></select></div>
@@ -1253,10 +1256,12 @@
   const STATUS_PROJETO = ['Em implantação', 'Em execução', 'Encerrado', 'Suspenso'];
   let TIPOS = ['Prestação de serviço', 'Compra de bens', 'Compra de consumo', 'Ativo imobilizado'];
   let CLASSIFICACOES = [];
+  let RUBRICAS_CFG = [];
   function aplicarListas(l) {
     if (!l) return;
     if (Array.isArray(l.tipo_despesa) && l.tipo_despesa.length) TIPOS = l.tipo_despesa.slice();
     if (Array.isArray(l.classificacao_contabil)) CLASSIFICACOES = l.classificacao_contabil.slice();
+    if (Array.isArray(l.rubrica)) RUBRICAS_CFG = l.rubrica.slice();
   }
   // Compra (bens, consumo…) × prestação de serviço
   const ehCompraC = c => !!c && (c.eh_compra === true || String(c.eh_compra).toUpperCase() === 'TRUE' || /^compra/i.test(String(c.tipo_despesa || '')));
@@ -1977,6 +1982,11 @@
     $('r_tipo_despesa').innerHTML = opcoes(TIPOS, r && r.tipo_despesa);
     $('r_classificacao_contabil').innerHTML = opcoes(CLASSIFICACOES, r && r.classificacao_contabil);
     $('r_classif_dica').classList.toggle('oculto', CLASSIFICACOES.length > 0);
+    // Descrição: lista de rubricas de Configurações; sem lista cadastrada, continua campo livre
+    $('r_descricao_caixa').innerHTML = RUBRICAS_CFG.length
+      ? `<select id="r_descricao" required>${opcoes(RUBRICAS_CFG, r && r.descricao)}</select>`
+      : '<input id="r_descricao" required>';
+    $('r_desc_dica').classList.toggle('oculto', RUBRICAS_CFG.length > 0);
     montarOpcoesTipoSit(r && r.classificacao_contabil);
     CAMPOS_RUB.forEach(c => {
       let v = r ? (r[c] ?? '') : '';
@@ -5091,7 +5101,7 @@ ${n(r.rendimentos) ? `<p style="margin:10px 0 0;color:#5b6770">Rendimentos de ap
     try {
       const l = await lerAgora('obterListas', {});
       aplicarListas(l);
-      $('lsTipos').value = l.tipo_despesa.join('\n'); $('lsClassif').value = l.classificacao_contabil.join('\n');
+      $('lsTipos').value = l.tipo_despesa.join('\n'); $('lsClassif').value = l.classificacao_contabil.join('\n'); $('lsRubricas').value = (l.rubrica || []).join('\n');
       msg('msgListas', '');
     } catch (err) { msg('msgListas', err.message); }
   }
@@ -5099,10 +5109,10 @@ ${n(r.rendimentos) ? `<p style="margin:10px 0 0;color:#5b6770">Rendimentos de ap
     const linhas = id => $(id).value.split('\n').map(x => x.trim()).filter(Boolean);
     const btn = $('btnSalvarListas'); btn.disabled = true; msg('msgListas', 'Salvando…', 'ok');
     try {
-      const l = await api('salvarListas', { tipo_despesa: linhas('lsTipos'), classificacao_contabil: linhas('lsClassif') });
+      const l = await api('salvarListas', { tipo_despesa: linhas('lsTipos'), classificacao_contabil: linhas('lsClassif'), rubrica: linhas('lsRubricas') });
       aplicarListas(l);
-      $('lsTipos').value = l.tipo_despesa.join('\n'); $('lsClassif').value = l.classificacao_contabil.join('\n');
-      msg('msgListas', `✓ Salvo: ${l.tipo_despesa.length} tipo(s) e ${l.classificacao_contabil.length} classificação(ões).`, 'ok');
+      $('lsTipos').value = l.tipo_despesa.join('\n'); $('lsClassif').value = l.classificacao_contabil.join('\n'); $('lsRubricas').value = (l.rubrica || []).join('\n');
+      msg('msgListas', `✓ Salvo: ${(l.rubrica || []).length} rubrica(s), ${l.tipo_despesa.length} tipo(s) e ${l.classificacao_contabil.length} classificação(ões).`, 'ok');
     } catch (err) { msg('msgListas', err.message); }
     btn.disabled = false;
   });

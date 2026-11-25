@@ -2,12 +2,14 @@
  * Listas.gs – listas editáveis em Configurações
  *  - Tipos de despesa (rubricas): Prestação de serviço, Compra de bens, Compra de consumo, Ativo imobilizado…
  *  - Classificações contábeis do SIT (aparecem para escolher no cadastro da rubrica)
- * Guardadas na aba CONFIG como JSON (chaves lista_tipo_despesa e lista_classificacao_contabil).
+ *  - Rubricas: descrições que aparecem para escolher no campo "Descrição rubrica" do Orçamento
+ * Guardadas na aba CONFIG como JSON (chaves lista_tipo_despesa, lista_classificacao_contabil e lista_rubrica).
  */
 
 const LISTAS_PADRAO_CFG = {
   tipo_despesa: ['Prestação de serviço', 'Compra de bens', 'Compra de consumo', 'Ativo imobilizado'],
-  classificacao_contabil: []
+  classificacao_contabil: [],
+  rubrica: []
 };
 
 function listaConfig_(nome) {
@@ -17,7 +19,7 @@ function listaConfig_(nome) {
 }
 
 function listasConfig_() {
-  return { tipo_despesa: listaConfig_('tipo_despesa'), classificacao_contabil: listaConfig_('classificacao_contabil') };
+  return { tipo_despesa: listaConfig_('tipo_despesa'), classificacao_contabil: listaConfig_('classificacao_contabil'), rubrica: listaConfig_('rubrica') };
 }
 
 function obterListas_(u) {
@@ -31,6 +33,7 @@ function salvarListas_(u, d) {
   if (!tipos.length) throw new Error('Cadastre pelo menos um tipo de despesa.');
   definirConfig_('lista_tipo_despesa', JSON.stringify(tipos), 'Tipos de despesa das rubricas');
   definirConfig_('lista_classificacao_contabil', JSON.stringify(classes), 'Classificações contábeis do SIT');
+  if (Array.isArray(d.rubrica)) definirConfig_('lista_rubrica', JSON.stringify(limpa(d.rubrica)), 'Rubricas (descrições para escolher no Orçamento)');
   registrarAuditoria_(u.id_usuario, 'CONFIG', 'listas', 'edicao', null, { tipos: tipos.length, classificacoes: classes.length });
   return listasConfig_();
 }

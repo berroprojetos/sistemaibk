@@ -394,7 +394,7 @@
     <nav class="nav" aria-label="Menu principal">
       <a class="nav-item ativo" id="navProjetos" href="#projetos"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Projetos</a>
       <a class="nav-item" id="btnInstituicoes" href="#instituicoes"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6M9 11h.01M15 11h.01"/></svg>Instituição</a>
-      <a class="nav-item" id="navPagamentos" href="#pagamentos"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/></svg>Pagamentos</a>
+      <a class="nav-item" id="navPagamentos" href="#pagamentos"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/></svg>Financeiro</a>
       <a class="nav-item" id="navSit" href="#sit"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>Prestação</a>
       <a class="nav-item" id="navExt" href="#extratos"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>Extratos</a>
       <a class="nav-item oculto" id="navForn" href="#fornecedores"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Prestadores</a>
@@ -460,7 +460,7 @@
       <div class="pagina-cab">
         <div>
           <p class="sobretitulo">Ciclo mensal</p>
-          <h1>Pagamentos</h1>
+          <h1>Financeiro</h1>
           <p class="subtitulo" id="pagSub"></p>
         </div>
         <div class="pag-filtros">
@@ -698,7 +698,7 @@
         </div>
         <p class="dica" style="margin-top:0">Para rubricas executadas por vários prestadores (ex.: palestras). A quantidade e o orçamento são da rubrica, somando todos.
           Cada prestador tem a sua contratação “Por demanda” (use <b>+ Prestador</b> na aba Orçamento). Registre cada palestra realizada e depois fature as de cada prestador:
-          a solicitação vira uma parcela que segue para Pagamentos (pedido de NF, comprovante, conferência e SIT).</p>
+          a solicitação vira uma parcela que segue para o Financeiro (pedido de NF, comprovante, conferência e SIT).</p>
         <div class="linha-form" style="margin-bottom:10px"><div><label for="fx_mes">Período (histórico)</label><input type="month" id="fx_mes"></div>
           <div style="display:flex;align-items:end"><button type="button" class="btn-link" id="fx_limpar">ver tudo</button></div></div>
         <div id="painelExec"><div class="vazio">Carregando…</div></div>
@@ -940,7 +940,7 @@
         <div class="largo" id="ex_fat_box"><label class="checkbox"><input type="checkbox" id="ex_fat" checked> Já gerar a solicitação de NF/pagamento desta palestra</label>
           <div class="dica" style="margin:4px 0 0">Desmarque se a nota vai juntar várias palestras do mesmo prestador (aí use “Faturar” depois).</div>
           <div id="ex_email_box" style="margin-top:8px"><label class="checkbox"><input type="checkbox" id="ex_email"> Enviar agora o e-mail pedindo a NF ao prestador</label>
-          <div class="dica" style="margin:4px 0 0">Usa o mesmo modelo do “Pedir notas fiscais” de Pagamentos. Se deixar desmarcado, peça depois por lá.</div></div></div>
+          <div class="dica" style="margin:4px 0 0">Usa o mesmo modelo do “Pedir notas fiscais” do Financeiro. Se deixar desmarcado, peça depois por lá.</div></div></div>
       </div>
     </div>
     <div class="modal-rodape">
@@ -968,7 +968,7 @@
       <div style="grid-column:span 2"><label>Total da solicitação</label><div class="total-preview" id="fa_total" style="margin:0;padding:10px 12px">—</div></div>
     </div>
     <label class="checkbox" style="margin-top:10px"><input type="checkbox" id="fa_email"> Enviar agora o e-mail pedindo a NF ao prestador</label>
-    <div class="dica" style="margin:4px 0 0">Mesmo modelo do “Pedir notas fiscais” de Pagamentos; a descrição da nota junta as descrições das palestras marcadas.</div>
+    <div class="dica" style="margin:4px 0 0">Mesmo modelo do “Pedir notas fiscais” do Financeiro; a descrição da nota junta as descrições das palestras marcadas.</div>
   </div>
   <div class="modal-rodape">
     <div class="msg" id="msgFaturar"></div>
@@ -1496,7 +1496,7 @@
   function mostrar(tela) { ['telaCarregando', 'telaLogin', 'telaSenha', 'telaApp'].forEach(t => $(t).classList.toggle('oculto', t !== tela)); }
   // ---------- permissões por funcionalidade (Configurações → Usuários)
   const AREAS_PERM = [['projetos', 'Projetos', 'Dados do projeto, orçamento, cotações, contratações, execuções e contratos. Editar também permite criar projeto nas instituições escolhidas (onde a pessoa vê todos os projetos).'],
-    ['pagamentos', 'Pagamentos', 'Pedir NF, anexar nota e comprovante, liberar, conferir, pausar, reprogramar e lançamentos diretos.'],
+    ['pagamentos', 'Financeiro', 'Pedir NF, anexar nota e comprovante, liberar, conferir, pausar, reprogramar e lançamentos diretos.'],
     ['extratos', 'Extratos', 'Anexar extratos, conciliar e classificar lançamentos (taxas, rendimentos).'],
     ['sit', 'Prestação', 'Bimestres, movimento mensal, envio ao SIT e marcação "Lançada no SIT".'],
     ['instituicoes', 'Instituição', 'Cadastro e documentos da instituição (cadastrar instituição nova só com acesso a todas).'],
@@ -1601,7 +1601,7 @@
   async function abrirApp() {
     mostrar('telaApp');
     const NOMES_PERFIL = { ADMIN: 'Administrador', PRESTACAO_CONTAS: 'Prestação de contas', GERENTE_PROJETO: 'Gerente do projeto',
-                           INSTITUICAO_CONTRATACAO: 'Contratação', INSTITUICAO_PAGAMENTO: 'Pagamentos', PERSONALIZADO: 'Acesso personalizado' };
+                           INSTITUICAO_CONTRATACAO: 'Contratação', INSTITUICAO_PAGAMENTO: 'Financeiro', PERSONALIZADO: 'Acesso personalizado' };
     const iniciais = String(usuario.nome || '?').trim().split(/\s+/).filter(Boolean);
     const ini = ((iniciais[0] || '?')[0] + (iniciais.length > 1 ? iniciais[iniciais.length - 1][0] : '')).toUpperCase();
     $('perfilNome').textContent = usuario.nome;
@@ -2644,7 +2644,7 @@ ${n(r.rendimentos) ? `<p style="margin:10px 0 0;color:#5b6770">Rendimentos de ap
             <td style="white-space:nowrap">${ctrAtual.parcelas_det ? `<button class="btn-sec" style="padding:5px 10px" data-ctrparc="${esc(p.id_parcela)}">Abrir</button>` : ''}
               ${ctrAtual.pode_reprogramar && c.modalidade !== 'Por demanda' && !ehCompra && parcelaLivre(p) ? `<button class="btn-link" data-repro="${esc(p.id_parcela)}" title="Mudar a competência desta parcela (ex.: mês de férias)">↪ Reprogramar</button>` : ''}
               ${ctrAtual.pode_reprogramar && parcelaLivre(p) ? (p.pausada ? `<button class="btn-link" data-ppausa="${esc(p.id_parcela)}" data-acao="retomar">▶ Retomar</button>`
-                : `<button class="btn-link" data-ppausa="${esc(p.id_parcela)}" data-acao="pausar" title="Tirar das pendências de Pagamentos">⏸ Pausar</button>`) : ''}</td></tr>`; }).join('')}</tbody>
+                : `<button class="btn-link" data-ppausa="${esc(p.id_parcela)}" data-acao="pausar" title="Tirar das pendências do Financeiro">⏸ Pausar</button>`) : ''}</td></tr>`; }).join('')}</tbody>
         </table></div>
       </div>`;
 
@@ -3119,7 +3119,7 @@ ${n(r.rendimentos) ? `<p style="margin:10px 0 0;color:#5b6770">Rendimentos de ap
   const passaEtapa = x => !pagEtapasSel.size || pagEtapasSel.has(x.status);
   const filtrarPag = lista => (lista || []).filter(x => passaInst(x) && passaEtapa(x));
   async function abrirPagamentos(mes, projeto) {
-    navAtivo('navPagamentos', 'Pagamentos');
+    navAtivo('navPagamentos', 'Financeiro');
     if (projeto !== undefined) pagFiltro = projeto || '';
     mostrarView('viewPag');
     if (/^ano-\d{4}$/.test(mes || '')) { pagPeriodo = 'ano'; $('pagMes').value = mes.slice(4) + (($('pagMes').value || hojeYM()).slice(4)); }
@@ -3326,7 +3326,7 @@ ${n(r.rendimentos) ? `<p style="margin:10px 0 0;color:#5b6770">Rendimentos de ap
     if (!ids.length) return alert('Selecione as parcelas.');
     let motivo = '';
     if (pausar) {
-      motivo = prompt('Pausar ' + ids.length + ' parcela(s)?\n\nElas saem das pendências de Pagamentos e não recebem pedido de NF até serem retomadas.\nSó parcelas sem nota e sem pagamento podem ser pausadas.\n\nMotivo (opcional):', '');
+      motivo = prompt('Pausar ' + ids.length + ' parcela(s)?\n\nElas saem das pendências do Financeiro e não recebem pedido de NF até serem retomadas.\nSó parcelas sem nota e sem pagamento podem ser pausadas.\n\nMotivo (opcional):', '');
       if (motivo === null) return;
     }
     try {
@@ -5654,7 +5654,7 @@ ${n(r.rendimentos) ? `<p style="margin:10px 0 0;color:#5b6770">Rendimentos de ap
         competencia: $('ex_comp').value, quantidade: $('ex_qtd').value, valor_unitario: $('ex_vu').value, descricao: $('ex_desc').value.trim(), arquivo,
         faturar: !execEditando && $('ex_fat').checked, enviar_email: !execEditando && $('ex_fat').checked && $('ex_email').checked });
       $('dlgExec').close(); renderExecucoes();
-      toast(!execEditando && $('ex_fat').checked ? 'Palestra registrada ✓ · solicitação de NF criada (aparece em Pagamentos)' + resultadoEmailExec(execDados.email) : 'Execução registrada ✓');
+      toast(!execEditando && $('ex_fat').checked ? 'Palestra registrada ✓ · solicitação de NF criada (aparece no Financeiro)' + resultadoEmailExec(execDados.email) : 'Execução registrada ✓');
     } catch (err) { msg('msgExec', err.message); }
     btn.disabled = false;
   });
@@ -5663,7 +5663,7 @@ ${n(r.rendimentos) ? `<p style="margin:10px 0 0;color:#5b6770">Rendimentos de ap
     if (!em) return '';
     if (em.enviados) return ' · e-mail pedindo a NF enviado ✉️';
     const f = (em.falhas || [])[0];
-    return ' · e-mail NÃO enviado' + (f ? ' (' + f.motivo + ')' : '') + ' – use “Pedir notas fiscais” em Pagamentos';
+    return ' · e-mail NÃO enviado' + (f ? ' (' + f.motivo + ')' : '') + ' – use “Pedir notas fiscais” no Financeiro';
   }
 
   // Faturar: projeto → rubrica → prestador → palestras
@@ -5724,7 +5724,7 @@ ${n(r.rendimentos) ? `<p style="margin:10px 0 0;color:#5b6770">Rendimentos de ap
     try {
       faDados = await api('faturarExecucoes', { id_contratacao: $('fa_ctr').value, ids, competencia: $('fa_comp').value, enviar_email: $('fa_email').checked });
       const comp = $('fa_comp').value;
-      msg('msgFaturar', `✓ Solicitação criada (serviços de ${mesAno(comp + '-01')}). Ela aparece em Pagamentos no mês seguinte` +
+      msg('msgFaturar', `✓ Solicitação criada (serviços de ${mesAno(comp + '-01')}). Ela aparece no Financeiro no mês seguinte` +
         (faDados.email ? resultadoEmailExec(faDados.email) + '.' : ', para pedir a NF.'), faDados.email && !faDados.email.enviados ? 'erro' : 'ok');
       if (atual && atual.projeto && atual.projeto.id_projeto === faProjeto) { execDados = faDados; renderExecucoes(); }
       preencherPrestFaturar($('fa_ctr').value);

@@ -9,7 +9,7 @@
  */
 (function () {
   const AREAS = [
-    ['beneficiarios', 'Beneficiários', 'Ficha da criança/adolescente, vínculos com projetos e documentos. Ver = consultar (ex.: prefeitura). Editar = matricular, alterar e desligar.'],
+    ['beneficiarios', 'Matrícula', 'Ficha da criança/adolescente, vínculos com projetos e documentos. Ver = consultar (ex.: prefeitura). Editar = matricular, alterar e desligar.'],
     ['presenca', 'Presença', 'Chamada, frequência, lista de presença do mês e oficinas dos projetos. Editar = fazer chamada e registrar ocorrência (educador).'],
     ['atendimentos', 'Atendimentos', 'Encaminhamentos, acompanhamentos, registros sigilosos e dados sensíveis (CID, renda, benefício). Só para a equipe técnica.']
   ];
@@ -124,7 +124,7 @@
       const ico = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
       nav.insertAdjacentHTML('beforeend',
         `<div class="lateral-rotulo" id="navBenRotulo" style="margin-top:14px">BENEFICIÁRIOS</div>
-         <a class="nav-item oculto" id="navBen" href="#beneficiarios">${ico('<circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/>')}Crianças e fichas</a>
+         <a class="nav-item oculto" id="navBen" href="#beneficiarios">${ico('<circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/>')}Matrícula</a>
          <a class="nav-item oculto" id="navBenCh" href="#chamada">${ico('<path d="M9 11l3 3 8-8"/><rect x="3" y="4" width="18" height="17" rx="2"/>')}Chamada</a>
          <a class="nav-item oculto" id="navBenFr" href="#frequencia">${ico('<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>')}Frequência</a>`);
       q('#navBen').addEventListener('click', () => abrirLista());
@@ -172,8 +172,8 @@
   // ───────── CRIANÇAS
   async function abrirLista() {
     FICHA = null;
-    const v = await abrirView('navBen', 'Beneficiários', 'beneficiarios');
-    v.innerHTML = cabecalho('Crianças e adolescentes', 'Beneficiários', 'Matrícula, ficha de inscrição, ocorrências, encaminhamentos, acompanhamentos e documentos.',
+    const v = await abrirView('navBen', 'Matrícula', 'beneficiarios');
+    v.innerHTML = cabecalho('Crianças e adolescentes', 'Matrícula', 'Matrícula, ficha de inscrição, ocorrências, encaminhamentos, acompanhamentos e documentos.',
       OP.pode.editar_ficha ? '<button class="btn" id="benNova">+ Nova matrícula</button>' : '') +
       `<div class="ben-filtros"><div><label>Buscar</label><input id="benBusca" placeholder="Nome, matrícula, responsável ou CPF"></div>
        <div><label>Situação</label><select id="benStatus"><option value="">Todas</option>${OP.listas.status_beneficiario.map(s => `<option>${esc(s)}</option>`).join('')}</select></div>
@@ -199,7 +199,7 @@
   }
 
   async function abrirFicha(id, sub) {
-    const v = await abrirView('navBen', 'Beneficiários', 'beneficiarios/' + id + '/' + (sub || SUB));
+    const v = await abrirView('navBen', 'Matrícula', 'beneficiarios/' + id + '/' + (sub || SUB));
     if (!FICHA || FICHA.ficha.id_beneficiario !== id) v.innerHTML = '<div class="vazio">Abrindo ficha…</div>';
     SUB = sub || SUB || 'dados';
     try {

@@ -1,7 +1,7 @@
 // Configuração do site do Sistema IBK
 // Cole abaixo a URL do App da Web do Apps Script
 // (no Apps Script: Implantar > Gerenciar implantações > copiar a URL que termina em /exec)
-window.API_URL = 'COLE_AQUI_A_URL_DO_APP_DA_WEB';
+window.API_URL = 'https://script.google.com/macros/s/AKfycbzlWrjtnV1feB5wHpb8irMtnSpkfST5OO6qaDFJpwRGE3YZpeP1ij_xAgnAt7zTpm9hjg/exec';
 
 // Aviso na tela enquanto a URL não estiver configurada
 if (!/^https:\/\/script\.google\.com\//.test(window.API_URL)) {

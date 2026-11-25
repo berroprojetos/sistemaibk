@@ -16,7 +16,7 @@
  * Prefeitura: usuário com "beneficiarios" e "presenca" em Ver, sem "atendimentos".
  */
 
-const BEN_VERSAO = '0.3.1';
+const BEN_VERSAO = '0.3.2';
 const BEN_ABAS = ['BENEFICIARIOS', 'OFICINAS', 'BEN_VINCULOS', 'BEN_CHAMADAS', 'BEN_PRESENCAS',
   'BEN_OCORRENCIAS', 'BEN_ENCAMINHAMENTOS', 'BEN_ACOMPANHAMENTOS', 'BEN_CONSENTIMENTOS', 'BEN_FOTOS', 'BEN_RECESSOS'];
 
@@ -57,6 +57,9 @@ const BEN_SCHEMA = {
     benF_('escola', 'Escola', 'texto', { secao: 'Escola' }),
     benF_('serie_ano', 'Série/ano', 'texto', { secao: 'Escola' }),
     benF_('turno_escolar', 'Turno na escola', 'lista', { lista: 'turno', secao: 'Escola' }),
+    benF_('condicoes_saude', 'Condições de saúde / uso de medicação contínua / restrições físicas', 'longo', { secao: 'Saúde' }),   // ficha IBK, pergunta 10
+    benF_('possui_diagnostico', 'Possui diagnóstico, condição específica ou necessidade importante para o acompanhamento nas atividades?', 'bool', { secao: 'Saúde' }),   // ficha IBK, pergunta 11
+    benF_('diagnostico_descricao', 'Qual diagnóstico, condição ou necessidade', 'longo', { secao: 'Saúde' }),
     benF_('possui_deficiencia', 'Possui deficiência?', 'bool', { secao: 'Saúde' }),
     benF_('deficiencia_descricao', 'Qual deficiência / necessidade específica', 'texto', { secao: 'Saúde' }),
     benF_('cid', 'CID (se houver laudo)', 'texto', { secao: 'Saúde', sensivel: true }),
@@ -228,7 +231,7 @@ const BEN_LISTAS = {
   status_oficina: ['Planejada', 'Em andamento', 'Suspensa', 'Encerrada'],
   status_vinculo: ['Ativo', 'Lista de espera', 'Encerrado'],
   situacao_presenca: ['Presente', 'Falta', 'Falta justificada'],
-  sexo: ['Feminino', 'Masculino', 'Prefere não informar'],
+  sexo: ['Feminino', 'Masculino', 'Outra', 'Prefere não informar'],
   cor_raca: ['Branca', 'Preta', 'Parda', 'Amarela', 'Indígena', 'Não declarada'],
   turno: ['Manhã', 'Tarde', 'Noite', 'Integral'],
   parentesco: ['Mãe', 'Pai', 'Avó/Avô', 'Tia/Tio', 'Irmã/Irmão', 'Responsável legal', 'Outro'],
@@ -571,7 +574,7 @@ function benListaPresenca_(u, d) {
   const criancas = ids.filter(id => bens[id]).map(id => {
     const b = bens[id], p = marcadas[id];
     return { id_beneficiario: id, nome: b.nome_social || b.nome_completo, idade: benIdade_(b.data_nascimento, data),
-      alerta_saude: [b.alergias, b.restricoes_alimentares].filter(String).join(' · '),
+      alerta_saude: [b.condicoes_saude, b.alergias, b.restricoes_alimentares].filter(String).join(' · '),
       situacao: p ? p.situacao : '', justificativa: p ? p.justificativa : '' };
   }).sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
   const imagem = benRespostas_(BEN_TIPO_IMAGEM);

@@ -216,7 +216,7 @@
     const consOk = f.consentimentos.filter(c => c.resposta).length;
     subs.push(['consentimentos', `Termos e autorizações (${consOk}/${f.consentimentos.length})`]);
     subs.push(['documentos', `Documentos (${f.documentos.length})`]);
-    const saude = [b.alergias, b.restricoes_alimentares, b.medicamentos].filter(Boolean).join(' · ');
+    const saude = [b.condicoes_saude, b.alergias, b.restricoes_alimentares, b.medicamentos].filter(Boolean).join(' · ');
     v.innerHTML = `<button class="btn-link voltar" id="benVoltar">← Voltar para a lista</button>
       <div class="titulo-linha"><div><h2 style="margin:0">${esc(b.nome_social || b.nome_completo)} ${st(b.status, corStatus(b.status))}</h2>
         <div class="dica" style="margin:4px 0 0">Matrícula ${esc(b.num_matricula)} · ${esc(b.idade)} anos · Responsável: ${esc(b.resp1_nome)} ${esc(b.resp1_telefone)}</div></div>

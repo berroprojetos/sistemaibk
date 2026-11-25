@@ -1,4 +1,4 @@
-# Módulo Beneficiários · Sistema IBK (v0.3.1)
+# Módulo Beneficiários · Sistema IBK (v0.3.2)
 
 Módulo de **Beneficiários**, agora ligado ao código do Gestor da Berro. Ele usa o mesmo login, as mesmas permissões (Configurações → Usuários), a AUDITORIA, a LIXEIRA, a pasta do Drive e o visual do site.
 
@@ -64,7 +64,7 @@ A lista de termos vale para todas as fichas e o Admin edita na própria ficha (T
 - A chamada vale pela data. Quem entrou depois ou saiu antes não aparece, e dá para lançar uma chamada atrasada. Salvar de novo no mesmo dia edita a chamada, sem duplicar.
 
 ## Pendente
-- **Campos da ficha:** estou esperando a ficha em papel do IBK para deixar os campos iguais.
+- **Campos da ficha:** a ficha de inscrição do IBK (formulário do projeto Jiu-jitsu) foi conferida na v0.3.2. Entraram "Condições de saúde / medicação contínua / restrições físicas", "Possui diagnóstico, condição específica ou necessidade?" com a descrição, e a opção "Outra" em Sexo. As outras perguntas já existiam.
 - **Termos da família:** a lista inicial é sugestão. Quando o IBK mandar os termos dele, o Admin troca pela tela (não precisa mexer no código).
 - **Documentos obrigatórios** (geram aviso na ficha): ficha assinada, certidão de nascimento, documento do responsável e comprovante de residência. ⚠ Isso é uma suposição.
 - **Oficinas** foram feitas junto com este módulo. Quando o módulo Projetos chegar (com Planejamento Pedagógico), elas passam para ele sem mudar a tela.

@@ -18,9 +18,40 @@ function modulosInstalados_() {
 
 let MODULOS_REGISTRADOS_ = null;
 
+/** Confere se todos os arquivos do núcleo foram colados no Apps Script; se faltar algum, diz qual. */
+function verificarArquivosNucleo_() {
+  const faltando = [];
+  const t = (arquivo, existe) => { if (!existe) faltando.push(arquivo); };
+  t('Admin.gs', typeof PERFIS_ADMIN !== 'undefined');
+  t('Api.gs', typeof doPost === 'function');
+  t('Auth.gs', typeof AREAS_PERMISSAO !== 'undefined');
+  t('Compras.gs', typeof itensDaCompra_ === 'function');
+  t('Contratacoes.gs', typeof PERFIS_CONTRATACAO !== 'undefined');
+  t('Contratos.gs', typeof MESES_PT !== 'undefined');
+  t('Cotações.gs', typeof CAMPOS_COTACAO_DESC !== 'undefined');
+  t('Código.gs', typeof ESTRUTURA !== 'undefined');
+  t('Dados.gs', typeof CAMPOS_SENSIVEIS !== 'undefined');
+  t('Execucoes.gs', typeof MODALIDADE_DEMANDA !== 'undefined');
+  t('Extratos.gs', typeof CONTAS_EXT !== 'undefined');
+  t('Fornecedores.gs', typeof PERFIS_FORNECEDORES !== 'undefined');
+  t('Instituicoes.gs', typeof PERFIS_CADASTRO_INST !== 'undefined');
+  t('Listas.gs', typeof LISTAS_PADRAO_CFG !== 'undefined');
+  t('Menu.gs', typeof onOpen === 'function');
+  t('Nomes.gs', typeof limparParteNome_ === 'function');
+  t('Pagamentos.gs', typeof PERFIS_LANCAMENTO_DIRETO !== 'undefined');
+  t('Prestacao.gs', typeof PERFIS_SIT !== 'undefined');
+  t('Projetos.gs', typeof PERFIS_EDICAO !== 'undefined');
+  t('Reparo.gs', typeof ABAS_COM_ID !== 'undefined');
+  if (faltando.length) {
+    throw new Error('Faltam arquivos do núcleo no Apps Script: ' + faltando.join(', ') +
+      '. Copie-os da pasta apps-script/nucleo do GitHub (mesmo nome, conteúdo completo) e salve.');
+  }
+}
+
 /** Junta as abas, listas, prefixos, áreas e ações dos módulos às do núcleo. Roda uma vez por execução. */
 function registrarModulos_() {
   if (MODULOS_REGISTRADOS_) return MODULOS_REGISTRADOS_;
+  verificarArquivosNucleo_();
   const acoes = {};
   modulosInstalados_().forEach(mod => {
     Object.keys(mod.estrutura || {}).forEach(aba => { ESTRUTURA[aba] = mod.estrutura[aba]; });
